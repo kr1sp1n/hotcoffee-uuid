@@ -1,6 +1,6 @@
 {
   "name": "hotcoffee-uuid",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Hotcoffee plugin to generate unique ids for new items",
   "main": "index.coffee",
   "dependencies": {
