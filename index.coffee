@@ -7,7 +7,7 @@ class Plugin extends EventEmitter
     @uuid = @opts?.uuid or require('uuid')
     @name = 'uuid'
     @app.hook (req, res, next)=>
-      req.body.id = @uuid.v1() unless req.body?.id?
+      req.body.id = @uuid.v1() if req.method == 'POST' and not req.body.id?
       next null
 
 module.exports = (app, opts)->

@@ -1,17 +1,30 @@
 {
   "name": "hotcoffee-uuid",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Hotcoffee plugin to generate unique ids for new items",
   "main": "index.coffee",
   "dependencies": {
     "uuid": "^2.0.1"
   },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
   "devDependencies": {
     "should": "^6.0.1",
-    "sinon": "^1.14.1"
+    "sinon": "^1.14.1",
+    "mocha": "2.0.1",
+    "mocha-spec-cov-alt": "^0.2.4",
+    "blanket": "^1.1.6",
+    "mocha-lcov-reporter": "0.0.2",
+    "coveralls": "^2.11.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha ./test",
+    "clean": "rm -rf ./node_modules",
+    "cov": "./node_modules/.bin/mocha ./test -R mocha-spec-cov-alt --require blanket",
+    "cov-html": "./node_modules/.bin/mocha -R html-cov --require blanket ./test > ./cov.html",
+    "coveralls": "NODE_ENV=test ./node_modules/.bin/mocha -R mocha-lcov-reporter --require blanket ./test | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,5 +40,20 @@
   "bugs": {
     "url": "https://github.com/kr1sp1n/hotcoffee-uuid/issues"
   },
-  "homepage": "https://github.com/kr1sp1n/hotcoffee-uuid"
+  "homepage": "https://github.com/kr1sp1n/hotcoffee-uuid",
+  "config": {
+    "blanket": {
+      "pattern": [
+        "index.coffee"
+      ],
+      "loader": "./node-loaders/coffee-script",
+      "data-cover-never": [
+        "node_modules",
+        "test"
+      ],
+      "spec-cov": {
+        "threshold": 100
+      }
+    }
+  }
 }
